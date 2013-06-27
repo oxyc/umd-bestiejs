@@ -1,0 +1,9 @@
+{
+  "name": "umd-bestiejs",
+  "main": "umd-bestiejs.js",
+  "scripts": [
+    "umd-bestiejs.js",
+    "b.js"
+  ],
+  "dependencies": {}
+}

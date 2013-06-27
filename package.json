@@ -1,0 +1,9 @@
+{
+  "name": "umd-bestiejs",
+  "version": "0.0.1",
+  "description": "Experimental module definition pattern inspired by BestieJS",
+  "dependencies": {},
+  "scripts": {
+    "test": "make test"
+  }
+}

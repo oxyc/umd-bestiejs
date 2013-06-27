@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UMD BestieJS test</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="?amd">AMD</a></li>
+      <li><a href="?component">Component</a></li>
+      <li><a href="?browserify">Browserify</a></li>
+      <li><a href="?rjs">rjs</a></li>
+      <li><a href="?browser">browser</a></li>
+    </ul>
+    <div id="result">
+      <div id="assertions" style="margin-bottom: 1em"></div>
+      <div id="tests"></div>
+      <div id="pass"></div>
+      <div id="fail"></div>
+    </div>
+    <script>
+      (function (root) {
+        if (root.location.hash === '#testem') {
+          root.document.write('<script src="/testem.js"><\/script>');
+        }
+        // Which loader/build are we testing.
+        root.TEST = this.location.search.slice(1);
+      }(this));
+    </script>
+    <script>
+      // Test functions
+      (function (root) {
+        var pass = 0, fail = 0, id = 0
+          , test = root.test = {};
+
+        var assert = test.assert = function(actual, expected, message) {
+          var result = { passed: 0, failed: 0, total: 1, id: ++id, name: message }
+
+          if (actual === expected) {
+            result.passed = 1;
+            pass++;
+            output = 'ok ' + id + ' ' + message;
+          } else {
+            result.failed = 1;
+            fail++;
+            output = 'not ok ' + id + ' ' + message;
+          }
+
+          root.document.getElementById('assertions').innerHTML += output + '<br>';
+          if (root.Testem) root.Testem.emit('test-result', result);
+        };
+
+        var isDone;
+        test.done = function() {
+          if (!isDone) isDone = true;
+          root.document.getElementById('pass').innerHTML = 'pass ' + pass;
+          root.document.getElementById('fail').innerHTML = 'fail ' + fail;
+          root.document.getElementById('tests').innerHTML = 'tests ' + (fail + pass);
+          if (root.Testem) {
+            root.Testem.emit('all-test-results', {
+              failed: fail,
+              total: pass,
+              tests: []
+            });
+          }
+        }
+        setTimeout(test.done, 5000);
+
+        test.init = function(type) {
+          switch (type) {
+            case 'amd':
+              root.document.write('<script src="../components/requirejs/require.js"><\/script>');
+              break;
+            case 'component':
+              root.document.write('<script src="../build/component.js"><\/script>');
+              break;
+            case 'browserify':
+              root.document.write('<script src="../build/browserify.js"><\/script>');
+              break;
+            case 'rjs':
+              root.document.write('<script src="../components/requirejs/require.js"><\/script>');
+              root.document.write('<script src="../build/rjs.js"><\/script>');
+              break;
+            case 'browser':
+            default:
+              root.document.write('<script src="../b.js"><\/script>');
+              root.document.write('<script src="../umd-bestiejs.js"><\/script>');
+              break;
+          }
+        }
+
+        test.run = function(type) {
+          switch (type) {
+            case 'amd':
+            case 'rjs':
+              var isLoaded = false;
+              var isExposed;
+              require({
+                  'baseUrl': '../'
+                // Thwart aggressive resource caching.
+                , 'urlArgs': 'async=' + (+new Date())
+              }, ['umd-bestiejs'], function(mod) {
+                isLoaded = mod.test === 'bar';
+                isExposed = root.bestiejs !== undefined;
+              });
+
+              setTimeout(function() {
+                assert(isLoaded && !isExposed, true, type);
+                root.test.done();
+              }, 1000);
+              break;
+            case 'component':
+              var mod = require('umd-bestiejs');
+              assert(mod.test, 'bar', 'component');
+              root.test.done();
+              break;
+            case 'browserify':
+              var mod = require('./umd-bestiejs');
+              assert(mod.test, 'bar', 'browserify');
+              root.test.done();
+              break;
+            case 'browser':
+            default:
+              assert(window['umd-bestiejs'].test, 'bar', 'browser');
+              root.test.done();
+              break;
+          }
+        }
+
+        if (root.Testem) root.Testem.emit('tests-start');
+      }(this));
+    </script>
+
+    <!-- Inject scripts -->
+    <script>this.test.init(this.TEST);</script>
+    <!-- Run assertions -->
+    <script>this.test.run(this.TEST);</script>
+  </body>
+</html>

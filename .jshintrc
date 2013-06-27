@@ -1,0 +1,21 @@
+{
+  "curly": false,
+  "eqeqeq": false,
+  "forin": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "regexp": true,
+  "undef": true,
+  "trailing": true,
+  "sub": true,
+  "boss": true,
+  "eqnull": true,
+  "laxcomma": true,
+  "loopfunc": true,
+  "browser": true,
+  "predef": ["exports", "module", "global", "define", "require", "load", "phantom", "console"]
+}

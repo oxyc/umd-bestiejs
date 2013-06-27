@@ -2,7 +2,12 @@
   "name": "umd-bestiejs",
   "version": "0.0.1",
   "description": "Experimental module definition pattern inspired by BestieJS",
-  "dependencies": {},
+  "devDependencies": {
+    "requirejs": "~2.1.6",
+    "component": "~0.16.5",
+    "browserify": "~2.22.0",
+    "jshint": "~2.1.4"
+  },
   "scripts": {
     "test": "make test"
   }

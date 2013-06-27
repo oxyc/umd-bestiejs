@@ -24,7 +24,7 @@ supported and tested in this repository:
 First step is to install required packages as well as generate the build files.
 
 ```sh
-make install
+npm install
 make build
 ```
 

@@ -35,6 +35,6 @@ echo "# tests $((pass + fail))"
 echo "# pass $pass"
 echo "# fail $fail"
 
-exit $fail
-
 popd > /dev/null
+
+exit $fail

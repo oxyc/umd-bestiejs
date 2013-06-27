@@ -69,7 +69,7 @@
         test.init = function(type) {
           switch (type) {
             case 'amd':
-              root.document.write('<script src="../components/requirejs/require.js"><\/script>');
+              root.document.write('<script src="../node_modules/requirejs/require.js"><\/script>');
               break;
             case 'component':
               root.document.write('<script src="../build/component.js"><\/script>');
@@ -78,7 +78,7 @@
               root.document.write('<script src="../build/browserify.js"><\/script>');
               break;
             case 'rjs':
-              root.document.write('<script src="../components/requirejs/require.js"><\/script>');
+              root.document.write('<script src="../node_modules/requirejs/require.js"><\/script>');
               root.document.write('<script src="../build/rjs.js"><\/script>');
               break;
             case 'browser':

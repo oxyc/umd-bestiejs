@@ -18,3 +18,18 @@ supported and tested in this repository:
 - [r.js](http://requirejs.org/docs/optimization.html)
 - AMD loaders
 - Browsers
+
+### Tests
+
+First step is to install required packages as well as generate the build files.
+
+```sh
+make install
+make build
+```
+
+Once that is done you can run the tests with
+
+```sh
+make test
+```

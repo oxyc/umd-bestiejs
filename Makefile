@@ -4,11 +4,11 @@ all: build test
 
 build: clean browserify component rjs
 
-test: lint
+test:
 	@./test/run-test.sh
 
 lint:
-	@jshint {,test/}*.js *.json
+	@jshint test/*.js *.js *.json
 
 browserify: umd-bestiejs.js
 	browserify -r ./$(subst .js,,$^) > $(BUILD)/browserify.js

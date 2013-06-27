@@ -1,4 +1,4 @@
-UMD BestieJS
+UMD BestieJS [![Build Status](https://travis-ci.org/oxyc/umd-bestiejs.png)](https://travis-ci.org/oxyc/umd-bestiejs)
 ============
 
 _Note this is NOT a BestieJS module._

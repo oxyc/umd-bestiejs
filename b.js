@@ -41,6 +41,6 @@
   }
 }(this, 'b', function (exports) {
 
-  exports.foo = 'bar';
+  exports.test = 'bar';
 
 }));

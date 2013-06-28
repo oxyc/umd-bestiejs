@@ -21,15 +21,6 @@ supported and tested in this repository:
 
 ### Tests
 
-First step is to install required packages as well as generate the build files.
+After cloning this repository, run `npm install` to install the test dependencies.
 
-```sh
-npm install
-make build
-```
-
-Once that is done you can run the tests with
-
-```sh
-make test
-```
+Once that is done you can run the tests with `npm test`.

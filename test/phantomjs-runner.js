@@ -31,9 +31,9 @@ page.onConsoleMessage = function(msg) {
   console.log(msg);
 };
 
-page.open(system.args[1], function(status){
+page.open(system.args[1], function (status){
   if (status !== "success") {
-    console.log("Unable to access network");
+    console.log("Failure: " + system.args[1]);
     phantom.exit(1);
   }
 

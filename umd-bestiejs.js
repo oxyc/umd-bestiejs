@@ -47,6 +47,6 @@
   }
 }(this, 'umd-bestiejs', function (exports, b) {
 
-  exports.test = b.foo;
+  exports.test = b.test;
 
 }));

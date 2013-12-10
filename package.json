@@ -1,6 +1,6 @@
 {
   "name": "umd-bestiejs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Experimental module definition pattern inspired by BestieJS",
   "repository": {
     "type": "git",

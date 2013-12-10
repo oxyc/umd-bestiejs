@@ -12,4 +12,4 @@ lint:
 clean:
 	@rm -f $(BUILD)/*
 
-.PHONY: build test lint browserify component rjs clean
+.PHONY: all test lint clean

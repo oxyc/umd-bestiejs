@@ -21,7 +21,7 @@
         // The loader to test.
         root.test.loader = (/loader=([^&]+)/.exec(parameters) || [,'browser'])[1];
         // Commes separated list of files where the first file is the main entry point.
-        root.test.files = (/files=([^&]+)/.exec(parameters) || [,'umd-bestiejs,b'])[1].split(',');
+        root.test.files = (/files=([^&]+)/.exec(parameters) || [,'umd-dependencies,umd-standalone'])[1].split(',');
       }(this));
     </script>
     <script>

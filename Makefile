@@ -11,13 +11,13 @@ test:
 lint:
 	@$(BIN)/jshint test/*.js *.js *.json
 
-browserify: umd-bestiejs.js
+browserify: umd-dependencies.js
 	$(BIN)/browserify -r ./$(subst .js,,$^) > $(BUILD)/browserify.js
 
 component:
 	$(BIN)/component build -o $(BUILD) -n component
 
-rjs: umd-bestiejs.js
+rjs: umd-dependencies.js
 	$(BIN)/r.js -o baseUrl=. name=$(subst .js,,$^) out=$(BUILD)/rjs.js > /dev/null
 
 clean:

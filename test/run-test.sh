@@ -9,8 +9,8 @@ pass=0
 fail=0
 
 files=(
-  "umd-bestiejs,b"
-  "b"
+  "umd-dependencies,umd-standalone"
+  "umd-standalone"
 )
 
 scaffoldComponentJson() {

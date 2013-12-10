@@ -41,7 +41,7 @@
   else {
     factory((root[name] = {}));
   }
-}(this, 'b', function (exports) {
+}(this, 'umd-standalone', function (exports) {
 
   exports.test = 'bar';
 

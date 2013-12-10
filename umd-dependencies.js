@@ -23,18 +23,18 @@
   // some AMD build optimizers, like r.js, check for specific condition
   // patterns like the following:
   if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
-    define(['exports', 'b'], factory);
+    define(['exports', 'umd-standalone'], factory);
   }
   // check for `exports` after `define` in case a build optimizer adds an
   // `exports` object
   else if (freeExports && freeModule) {
     // in Node.js or RingoJS v0.8.0+
     if (moduleExports) {
-      factory(freeModule.exports, require('./b'));
+      factory(freeModule.exports, require('./umd-standalone'));
     }
     // in Narwhal or RingoJS v0.7.0-
     else {
-      factory(freeExports, require('./b'));
+      factory(freeExports, require('./umd-standalone'));
     }
   }
   // in a browser, Rhino or D8
@@ -43,11 +43,11 @@
     if (typeof load == 'function') {
       // modules are sourced and not returned. The path should be relative to
       // the executing script, in this case from `test/`
-      load(['../b.js']);
+      load(['../umd-standalone.js']);
     }
-    factory((root[name] = {}), root.b);
+    factory((root[name] = {}), root['umd-standalone']);
   }
-}(this, 'umd-bestiejs', function (exports, b) {
+}(this, 'umd-dependencies', function (exports, b) {
 
   exports.test = b.test;
 

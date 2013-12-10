@@ -81,6 +81,8 @@ runTest() {
 
 }
 
+# Clean old build files
+rm -f $root/$build_dir/*
 # Initialize
 for file in "${files[@]}"; do
   build "$file"

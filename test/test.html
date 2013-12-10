@@ -79,6 +79,9 @@
             case 'rjs':
               root.document.write('<script src="../build/' + mainFile + '-rjs.js"><\/script>');
               break;
+            case 'leaked-exports':
+              window.exports = {};
+            /* fall through */
             case 'browser':
             default:
               var file;
@@ -117,6 +120,10 @@
             case 'browserify':
               var mod = require('./' + mainFile);
               assert(mod.test, 'bar', files.join(' ') + ' - browserify');
+              root.test.done();
+              break;
+            case 'leaked-exports':
+              assert(window[mainFile].test, 'bar', files.join(' ') + ' - leaked-exports');
               root.test.done();
               break;
             case 'browser':

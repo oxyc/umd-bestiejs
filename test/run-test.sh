@@ -75,7 +75,7 @@ runTest() {
       assert "$engine test.js $argDelimiter ../${mainFile}.js" "$files - $engine"
     fi
   done
-  for loader in amd browserify component rjs browser; do
+  for loader in amd browserify component rjs browser leaked-exports; do
     assert "phantomjs phantomjs-runner.js 'test.html?files=$files&loader=$loader'" "$files - $loader"
   done
 

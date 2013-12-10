@@ -1,7 +1,11 @@
 {
   "name": "umd-bestiejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Experimental module definition pattern inspired by BestieJS",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:oxyc/umd-bestiejs.git"
+  },
   "devDependencies": {
     "requirejs": "~2.1.6",
     "component": "~0.16.5",

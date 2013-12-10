@@ -8,9 +8,11 @@
     'undefined': false
   };
   // Detect free variable `exports`
-  var freeExports = objectTypes[typeof exports] && exports;
+  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
   // Detect free variable `module`
-  var freeModule = objectTypes[typeof module] && module && module.exports == freeExports && module;
+  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+  // Detect the popular CommonJS extension `module.exports`
+  var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
   // Detect free variable `global`, from Node.js or Browserified code, and use
   // it as `window`
   var freeGlobal = objectTypes[typeof global] && global;
@@ -25,9 +27,9 @@
   }
   // check for `exports` after `define` in case a build optimizer adds an
   // `exports` object
-  else if (freeExports && !freeExports.nodeType) {
+  else if (freeExports && freeModule) {
     // in Node.js or RingoJS v0.8.0+
-    if (freeModule) {
+    if (moduleExports) {
       factory(freeModule.exports);
     }
     // in Narwhal or RingoJS v0.7.0-

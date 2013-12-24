@@ -64,7 +64,7 @@ Options
 - `narwhal: true` Support [Narwhal][narwhal] engine (also supports `ringo` v0.7.0-)
 - `d8: true` Support [D8][d8] (also supports `browser` and `rhino`)
 - `cjs: undefined` Support CommonJS (alias of `node`)
-- `rjs: undefined` Support [r.js][1] (alias of `amd`)
+- `rjs: undefined` Support [r.js][rjs] (alias of `amd`)
 - `browserify: undefined` Support [Browserify][browserify] (alias of `node`)
 - `component: undefined` Support [Component][component] (alias of `node`)
 - `template: 'standalone'` Template to use, can be the path to a template file or one of the predefined templates available.
@@ -107,11 +107,11 @@ License
 
 MIT
 
-[node][http://nodejs.org/]
-[component][http://component.io/]
-[browserify][http://browserify.org/]
-[d8][http://code.google.com/p/v8/]
-[ringo][http://ringojs.org]
-[rhino][https://developer.mozilla.org/en-US/docs/Rhino]
-[narwhal][https://github.com/280north/narwhal]
-[rjs][http://requirejs.org/docs/optimization.html]
+[node]: http://nodejs.org/
+[component]: http://component.io/
+[browserify]: http://browserify.org/
+[d8]: http://code.google.com/p/v8/
+[ringo]: http://ringojs.org
+[rhino]: https://developer.mozilla.org/en-US/docs/Rhino
+[narwhal]: https://github.com/280north/narwhal
+[rjs]: http://requirejs.org/docs/optimization.html

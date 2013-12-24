@@ -81,7 +81,7 @@ function template(options) {
   var source = Handlebars.compile(fs.readFileSync(templateFile, 'utf-8'))(options);
   if (options.beautify) source = beautify(source, options.beautify);
   if (options.uglify) source = uglify.minify(source, extend(options.uglify, { fromString: true })).code;
-  return source.replace('INSERT()', '\nINSERT()').split('INSERT()');
+  return source.replace(/\s*INSERT\(\)/, '\n\nINSERT()').split('INSERT()');
 }
 
 exports.normalizeEngines = normalizeEngines;

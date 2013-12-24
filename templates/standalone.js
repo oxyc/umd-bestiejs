@@ -72,5 +72,5 @@
 {{/oneof}}
 }(this, '{{ namespace }}', function (exports) {
 
-  INSERT()
+INSERT()
 }));

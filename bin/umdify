@@ -1,0 +1,89 @@
+#!/usr/bin/env node
+'use strict';
+
+var fs = require('fs')
+  , umdify = require('../')
+  , args = process.argv.splice(2)
+  , isTTY = process.stdin.isTTY
+  , namespace
+  , input = process.stdin
+  , output = process.stdout
+  , options = {};
+
+function die() {
+  console.error.apply(console, arguments);
+  process.exit(1);
+}
+
+function usage() {
+  console.log([
+      "Usage: umdify [option]... <name> <source>..."
+    , "\nOptions:"
+    , "  -t|--template"
+    , "  --[no]-uglify"
+    , "  --[no]-indent"
+    , "  -v|--version"
+    , "  -h|--help"
+    , "\nEngines:"
+    , "  --[no]-ringo"
+    , "  --[no]-rhino"
+    , "  --[no]-node"
+    , "  --[no]-narwhal"
+    , "  --[no]-browser"
+    , "  --[no]-d8"
+    , "  --[no]-amd"
+    , "  --[no]-rjs"
+    , "  --[no]-cjs"
+    , "  --[no]-component"
+    , "  --[no]-browserify"
+  ].join("\n"));
+}
+
+if (isTTY && !args.length) {
+  usage();
+  process.exit(1);
+}
+
+for (var i = 0, l = args.length; i < l; i++) {
+  var arg = args[i], match, flag, enable;
+  if (match = /^(?:-|--)(?:(no)-)?(\w+)$/.exec(arg)) {
+    enable = !('no' === match[1]);
+    flag = match[2];
+
+    switch (flag) {
+      case 'h': case 'help':
+        usage();
+        process.exit(1);
+        break;
+      case 'v': case 'version':
+        console.log(require('../package.json').version);
+        process.exit(0);
+        break;
+      case 't': case 'template':
+        options.template = args[++i];
+        continue;
+      case 'uglify':
+        options.uglify = enable;
+        continue;
+      case 'indent':
+        if (!enable) options.indent = false;
+        continue;
+      case 'node': case 'ringo': case 'rhino': case 'narwhal': case 'browser':
+      case 'd8': case 'amd': case 'rjs': case 'component': case 'browserify':
+      case 'cjs':
+        options[flag] = enable;
+        continue;
+      default:
+        console.log("Unknown option: %s", match[0]);
+        process.exit(2);
+    }
+  }
+  // First argument is the required namespace
+  if (typeof namespace === 'undefined') namespace = arg;
+  // Second argument is the file
+  else if (input === process.stdin) input = fs.createReadStream(arg);
+  else die('Too many argument: %s', arg);
+}
+if (typeof namespace !== 'string') die('Missing namespace');
+
+input.pipe(umdify(namespace, options)).pipe(output);

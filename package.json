@@ -1,0 +1,23 @@
+{
+  "name": "umdify",
+  "version": "0.0.1",
+  "description": "umdify",
+  "main": "index.js",
+  "dependencies": {
+    "combined-stream": "~0.0.4",
+    "concat-stream": "~1.2.1",
+    "event-stream": "~3.0.20",
+    "handlebars": "~1.1.2",
+    "through": "~2.3.4"
+  },
+  "devDependencies": {
+    "js-beautify": "~1.4.2",
+    "uglify-js": "~2.4.8",
+    "node.extend": "~1.0.8"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "author": "Oskar Schöldström <public@oxy.fi> (http://www.oxy.fi/)",
+  "license": "MIT"
+}

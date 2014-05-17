@@ -1,24 +1,25 @@
-(function (root, name, factory) {
+(function (name, factory) {
+<% if (commonjs || global) { %>
+  // Used to determine if values are of the language type `Object`
   var objectTypes = {
-    'boolean': false,
     'function': true,
-    'object': true,
-    'number': false,
-    'string': false,
-    'undefined': false
+    'object': true
   };
+<% } %>
+  // Used as a reference to the global object
+  var root = (objectTypes[typeof window] && window) || this;
+<% if (commonjs) { %>
   // Detect free variable `exports`
   var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
   // Detect free variable `module`
   var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-  // Detect the popular CommonJS extension `module.exports`
-  var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
   // Detect free variable `global`, from Node.js or Browserified code, and use
   // it as `window`
-  var freeGlobal = objectTypes[typeof global] && global;
-  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
+  var freeGlobal = freeExports && freeModule && objectTypes[typeof global] && global;
+  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal)) {
     root = freeGlobal;
   }
+<% } %>
 
   // some AMD build optimizers, like r.js, check for specific condition
   // patterns like the following:
@@ -29,13 +30,7 @@
   // `exports` object
   else if (freeExports && freeModule) {
     // in Node.js or RingoJS v0.8.0+
-    if (moduleExports) {
-      factory(freeModule.exports, {{#requires dependencies}}{{ path }}{{/requires}});
-    }
-    // in Narwhal or RingoJS v0.7.0-
-    else {
-      factory(freeExports, {{#requires dependencies}}{{ path }}{{/requires}});
-    }
+    factory(freeExports, {{#requires dependencies}}{{ path }}{{/requires}});
   }
   // in a browser, Rhino or D8
   else {
@@ -47,7 +42,7 @@
     }
     factory((root[name] = {}), {{#globals dependencies}}{{ name }}{{/globals}});
   }
-}(this, '{{ namespace }}', function (exports, b) {
+}('<%= namespace %>', function (exports, b) {
 
 {{{ script }}}
 

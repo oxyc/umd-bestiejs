@@ -3,7 +3,7 @@
 
 var fs = require('fs')
   , umdify = require('../')
-  , args = process.argv.splice(2)
+  , args = process.argv.slice(2)
   , isTTY = process.stdin.isTTY
   , namespace
   , input = process.stdin
@@ -17,7 +17,7 @@ function die() {
 
 function usage() {
   console.log([
-      "Usage: umdify [option]... <name> <source>..."
+      "\nUsage: umdify [option]... <name> <source>..."
     , "\nOptions:"
     , "  -t|--template"
     , "  --[no]-uglify"
@@ -25,17 +25,9 @@ function usage() {
     , "  -v|--version"
     , "  -h|--help"
     , "\nEngines:"
-    , "  --[no]-ringo"
-    , "  --[no]-rhino"
-    , "  --[no]-node"
-    , "  --[no]-narwhal"
-    , "  --[no]-browser"
-    , "  --[no]-d8"
+    , "  --[no]-global"
     , "  --[no]-amd"
-    , "  --[no]-rjs"
-    , "  --[no]-cjs"
-    , "  --[no]-component"
-    , "  --[no]-browserify"
+    , "  --[no]-commonjs"
   ].join("\n"));
 }
 
@@ -68,9 +60,7 @@ for (var i = 0, l = args.length; i < l; i++) {
       case 'indent':
         if (!enable) options.indent = false;
         continue;
-      case 'node': case 'ringo': case 'rhino': case 'narwhal': case 'browser':
-      case 'd8': case 'amd': case 'rjs': case 'component': case 'browserify':
-      case 'cjs':
+      case 'global': case 'amd': case 'commonjs':
         options[flag] = enable;
         continue;
       default:
@@ -82,7 +72,7 @@ for (var i = 0, l = args.length; i < l; i++) {
   if (typeof namespace === 'undefined') namespace = arg;
   // Second argument is the file
   else if (input === process.stdin) input = fs.createReadStream(arg);
-  else die('Too many argument: %s', arg);
+  else die('Too many arguments: %s', arg);
 }
 if (typeof namespace !== 'string') die('Missing namespace');
 

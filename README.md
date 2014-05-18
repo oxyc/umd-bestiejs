@@ -56,14 +56,20 @@ umdify --no-amd foobar foobar.js
 
 ## Options
 
-- `amd: true` Support AMD
-- `global: true` Support browsers, `d8` and `rhino`
-- `commonjs: undefined` Support CommonJS environments (node.js, ringo, rhino, narwhal, browserify and component)
-- `template: 'standalone'` Template to use, can be the path to a template file or one of the predefined templates available.
-- `indent: '  '` Indent the source code to match the UMD patterns nesting level.
-- `uglify: false` If truthy `uglify-js` will be used to minify the UMD pattern and this property will be passed as the options object.
-- `beautify: { indent_size: 2, preserve_newlines: false }` Options to be passed to `js-beautify` while beautifying the UMD pattern.
-
+- `amd: true`<br>
+  Support AMD
+- `global: true`<br>
+  Support browsers, `d8` and `rhino`
+- `commonjs: true`<br>
+  Support CommonJS environments (Node.js, `ringo`, `rhino -require`, `narwhal`, `browserify` and `component`)
+- `template: 'standalone'`<br>
+  Template to use, can be the path to a template file or one of the predefined templates available.
+- `indent: '  '`<br>
+  Indent the source code to match the UMD patterns nesting level.
+- `uglify: false`<br>
+  If truthy `uglify-js` will be used to minify the UMD pattern and this property will be passed as the options object.
+- `beautify: { indent_size: 2, preserve_newlines: false }`<br>
+Options to be passed to `js-beautify` while beautifying the UMD pattern.
 
 ## `umdify(1)`
 
@@ -89,7 +95,7 @@ Engines:
 
 ```sh
 $ echo "exports.foobar = 'baz';" > foobar.js
-$ umdify --comonjs foobar foobar.js
+$ umdify foobar foobar.js
 ```
 
 ```js

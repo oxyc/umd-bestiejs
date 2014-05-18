@@ -8,7 +8,7 @@ var _ = require('lodash')
 var defaultOptions = exports.defaultOptions = {
     amd: true
   , global: true
-  , commonjs: undefined
+  , commonjs: true
 
   // Template to use, can be the path to a template file or one of the
   // predefined templates available.
